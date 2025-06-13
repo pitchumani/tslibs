@@ -51,12 +51,12 @@ jobs:
         run: |
           cmake ..
           cmake --build .
-          ./tsstack_test
+          ./bin/tsstack_test
         working-directory: src/tests/build
       - name: Build and run unit tests (Windows)
         if: runner.os == 'Windows'
         run: |
           cmake ..
           cmake --build .
-          .\tsstack_test.exe
+          .\bin\tsstack_test.exe
         working-directory: src/tests/build
