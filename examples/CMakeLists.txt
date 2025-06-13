@@ -16,20 +16,20 @@ if(NOT TSSTACK_INCLUDE_DIR)
     message(FATAL_ERROR "Could not find tsstack in ${CUSTOM_INSTALL_PREFIX}/include. Please install the header first.")
 endif()
 
-add_executable(example1 tsstack-example.cpp)
-add_executable(example2 stack-example.cpp)
+add_executable(tsstack_example tsstack-example.cpp)
+add_executable(stack_example stack-example.cpp)
 
-target_include_directories(example1 PRIVATE ${TSSTACK_INCLUDE_DIR})
-target_include_directories(example2 PRIVATE ${TSSTACK_INCLUDE_DIR})
+target_include_directories(tsstack_example PRIVATE ${TSSTACK_INCLUDE_DIR})
+target_include_directories(stack_example PRIVATE ${TSSTACK_INCLUDE_DIR})
 
 add_custom_target(run_tsstack_example
     COMMENT "Run tsstack example"
-    COMMAND ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/example1
+    COMMAND ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/tsstack_example
     WORKING_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
 )
 add_custom_target(run_stack_example
     COMMENT "Run stack example"
-    COMMAND ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/example2
+    COMMAND ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/stack_example
     WORKING_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
 )
 

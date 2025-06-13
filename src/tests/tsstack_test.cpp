@@ -1,8 +1,9 @@
-#include "tsstack.h"
 #include <cassert>
 #include <iostream>
 #include <thread>
 #include <vector>
+
+#include "tsstack"
 
 void test_basic() {
     TSStack<int> s;

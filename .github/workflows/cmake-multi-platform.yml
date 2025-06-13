@@ -28,21 +28,23 @@ jobs:
           cmake --build .
           cmake --install .
         working-directory: build
-      - name: Configure examples
-        run: cmake -DCUSTOM_INSTALL_PREFIX=../../install ..
+      - name: Configure examples (independent)
+        run: cmake -DCUSTOM_INSTALL_PREFIX=../install ..
         working-directory: examples/build
       - name: Build examples
         run: cmake --build .
         working-directory: examples/build
       - name: Run example tests (Linux/macOS)
         if: runner.os != 'Windows'
-        run: ./bin/example1 && ./bin/example2
+        run: |
+          ./bin/tsstack_example
+          ./bin/stack_example
         working-directory: examples/build
       - name: Run example tests (Windows)
         if: runner.os == 'Windows'
         run: |
-          .\bin\example1.exe
-          .\bin\example2.exe
+          .\bin\tsstack_example.exe
+          .\bin\stack_example.exe
         working-directory: examples/build
       - name: Build and run unit tests (Linux/macOS)
         if: runner.os != 'Windows'
