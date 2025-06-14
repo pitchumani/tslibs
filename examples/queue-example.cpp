@@ -5,11 +5,15 @@
 #include <iostream>
 #include <vector>
 #include <thread>
+#include <memory> // for std::shared_ptr
 
 class MyClass {
     int data;
 public:
     MyClass(int data) : data(data) {}
+    void Print() const {
+        std::cout << "MyClass data: " << data << std::endl;
+    }
 };
 
 class Worker {
