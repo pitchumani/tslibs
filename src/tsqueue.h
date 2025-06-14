@@ -33,17 +33,17 @@ public:
 
     value_type& front() {
         std::lock_guard<std::mutex> lock(mtx);
-        if (data.empty()) std::throw std::runtime_error("TSQueue is empty!")
+        if (data.empty()) throw std::runtime_error("TSQueue is empty!")
         return data.front();
     }
 
     void pop() {
         std::lock_guard<std::mutex> lock(mtx);
-        if (data.empty()) std::throw std::runtime_error("TSQueue is empty!");
+        if (data.empty()) throw std::runtime_error("TSQueue is empty!");
         data.erase(data.begin());
     }
 
-    void push(value_type& value) {
+    void push(const value_type& value) {
         std::lock_guard<std::mutex> lock(mtx);
         data.push_back(value);
     }
