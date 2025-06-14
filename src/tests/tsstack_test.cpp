@@ -3,7 +3,7 @@
 #include <thread>
 #include <vector>
 
-#include "tsstack"
+#include "../tsstack.h"
 
 void test_basic() {
     TSStack<int> s;

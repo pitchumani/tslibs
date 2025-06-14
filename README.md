@@ -49,7 +49,23 @@ int main() {
    ```
    Below files are expected to be installed (in `/path/to/install`):
    - include/tsstack
+   - include/tsqueue
 
+3. **Run Tests:**
+
+   To run unittests, you can use:
+   ```bash
+   make check
+   ```
+   or
+   ```bash
+   make test
+   ```
+   or
+   ```bash
+   ctest
+   ```
+ 
 3. **Build and Run Examples:**
    ```bash
    cd examples
@@ -57,21 +73,22 @@ int main() {
    cd build
    cmake ..
    make
-   make run_examples
+   make run_tslib_examples
+   make run_stdlib_examples
    ```
-   The stack example is expected to fail randomly due to the concurrent access issue while multithreading.
+   The standard library examples are expected to fail randomly due to the concurrent access issue while multithreading.
    To run individual examples, you can use:
    ```bash
-   make run_tsstack_example
    make run_stack_example
+   make run_queue_example
    ```
    or directly execute the binaries:
    ```bash
-   ./tsstack_example
-   ./stack_example
+   ./bin/tsstack_example
+   ./bin/stack_example
+   ./bin/tsqueue_example
+   ./bin/queue_example
    ```
 
-4. **Run Tests:**
-   ```bash
-   TBD
-   ```
+## License:
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
