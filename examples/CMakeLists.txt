@@ -46,7 +46,11 @@ add_custom_target(run_queue_example
     COMMAND ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/queue_example
     WORKING_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
 )
-add_custom_target(run_examples
-    DEPENDS run_tsstack_example run_stack_example run_tsqueue_example run_queue_example
-    COMMENT "Running all examples..."
+add_custom_target(run_stdlib_examples
+    DEPENDS run_stack_example run_queue_example
+    COMMENT "Running all standard library examples..."
+)
+add_custom_target(run_tslib_examples
+    DEPENDS run_tsstack_example run_tsqueue_example
+    COMMENT "Running all tslibs examples..."
 )

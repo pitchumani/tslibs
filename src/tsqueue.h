@@ -3,6 +3,9 @@
 
 #include <vector>
 #include <mutex>
+#include <stdexcept>
+#include <utility> // for std::forward
+#include <memory> // for std::shared_ptr
 
 template<typename value_type>
 class TSQueue {
@@ -33,7 +36,7 @@ public:
 
     value_type& front() {
         std::lock_guard<std::mutex> lock(mtx);
-        if (data.empty()) throw std::runtime_error("TSQueue is empty!")
+        if (data.empty()) throw std::runtime_error("TSQueue is empty!");
         return data.front();
     }
 

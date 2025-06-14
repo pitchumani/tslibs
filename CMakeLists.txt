@@ -16,3 +16,8 @@ install(FILES src/tsqueue.h DESTINATION include RENAME tsqueue)
 # Run the tests
 enable_testing()
 add_subdirectory(src/tests)
+
+add_custom_target(check COMMAND ${CMAKE_CTEST_COMMAND} --output-on-failure
+    DEPENDS run_tests
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+)
