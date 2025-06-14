@@ -1,23 +1,30 @@
 cmake_minimum_required(VERSION 3.10)
-project(tsstack_tests)
-
-# Allow user to specify a custom install prefix, default to ../../install if not set
-if(NOT DEFINED CUSTOM_INSTALL_PREFIX)
-    set(CUSTOM_INSTALL_PREFIX "${CMAKE_SOURCE_DIR}/../../install")
-endif()
+project(tslibs_tests)
 
 # Set output directory for test binary
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
-# Find the installed tsstack header (header-only, installed as 'tsstack' with no .h)
-find_path(TSSTACK_INCLUDE_DIR NAMES tsstack PATHS ${CUSTOM_INSTALL_PREFIX}/include)
-
-if(NOT TSSTACK_INCLUDE_DIR)
-    message(FATAL_ERROR "Could not find tsstack in ${CUSTOM_INSTALL_PREFIX}/include. Please install the header first.")
-endif()
+# For unit tests, use the source directory as the include path
+set(TSLIBS_UNIT_TESTS_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/src")
 
 add_executable(tsstack_test tsstack_test.cpp)
-target_include_directories(tsstack_test PRIVATE ${TSSTACK_INCLUDE_DIR})
+target_include_directories(tsstack_test PRIVATE ${TSLIBS_UNIT_TESTS_INCLUDE_DIR})
+
+add_executable(tsqueue_test tsqueue_test.cpp)
+target_include_directories(tsqueue_test PRIVATE ${TSLIBS_UNIT_TESTS_INCLUDE_DIR})
+
+# Enable all compiler warnings, treat warnings as errors
+add_compile_options(-Wall -Wextra -Werror)
 
 enable_testing()
 add_test(NAME tsstack_test COMMAND tsstack_test)
+add_test(NAME tsqueue_test COMMAND tsqueue_test)
+
+# Add custom target to run all tests
+add_custom_target(run_tests
+    COMMAND ${CMAKE_CTEST_COMMAND} --output-on-failure
+    DEPENDS tsstack_test tsqueue_test
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+)
+# Run tests automatically after build
+add_dependencies(run_tests tsstack_test tsqueue_test)
