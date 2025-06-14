@@ -16,6 +16,9 @@ if(NOT TSLIBS_INCLUDE_DIR)
     message(FATAL_ERROR "Could not find tsstack in ${CUSTOM_INSTALL_PREFIX}/include. Please install the header first.")
 endif()
 
+# Enable all compiler warnings and treat them as errors
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Werror -Wno-unused-private-field")
+
 add_executable(tsstack_example tsstack-example.cpp)
 add_executable(stack_example stack-example.cpp)
 add_executable(tsqueue_example tsqueue-example.cpp)
